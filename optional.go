@@ -5,12 +5,12 @@ type V[T any] struct {
 	set   bool
 }
 
-func (o V[T]) Value() T {
-	return o.value
+func (x V[T]) Value() T {
+	return x.value
 }
 
-func (o V[T]) Set() bool {
-	return o.set
+func (x V[T]) Set() bool {
+	return x.set
 }
 
 func Wrap[T any](value T) V[T] {
@@ -20,6 +20,7 @@ func Wrap[T any](value T) V[T] {
 	}
 }
 
-func Unwrap[T any](o V[T]) (T, bool) {
-	return o.value, o.set
+func Unwrap[T any](x V[T]) (T, bool) {
+	return x.value, x.set
+}
 }

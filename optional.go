@@ -40,9 +40,9 @@ func Less[U cmp.Ordered](x, y T[U]) bool {
 
 // Compare returns
 //
-// -1 if x is less than y,
-// 0 if x equals y,
-// +1 if x is greater than y
+//	-1 if x is less than y,
+//	0 if x equals y,
+//	+1 if x is greater than y
 //
 // Unset value is always considered less.
 func Compare[U cmp.Ordered](x, y T[U]) int {

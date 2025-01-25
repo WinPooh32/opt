@@ -1,26 +1,28 @@
 package opt
 
-type V[T any] struct {
-	value T
+import "cmp"
+
+type T[U any] struct {
+	value U
 	set   bool
 }
 
-func (x V[T]) Value() T {
+func (x T[U]) Value() U {
 	return x.value
 }
 
-func (x V[T]) Set() bool {
+func (x T[U]) Set() bool {
 	return x.set
 }
 
-func Wrap[T any](value T) V[T] {
-	return V[T]{
+func Wrap[U any](value U) T[U] {
+	return T[U]{
 		value: value,
 		set:   true,
 	}
 }
 
-func Unwrap[T any](x V[T]) (T, bool) {
+func Unwrap[U any](x T[U]) (U, bool) {
 	return x.value, x.set
 }
 }

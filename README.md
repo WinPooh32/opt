@@ -29,7 +29,7 @@ import (
 func main() {
 	var v opt.T[int]
 
-  v = opt.Wrap(1)
+	v = opt.Wrap(1)
 
 	if v.Set() {
 		fmt.Println(v.Value())

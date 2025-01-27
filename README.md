@@ -8,7 +8,7 @@ The `opt` package provides a generic type for optional values.
 ## Features
 
 - Generic: `T[U]` struct holds any type of value.
-- Sortable: implements "cmp"-like helper functions `Less` and `Compare`.
+- Sortable: implements "cmp"-like helper functions `Less` and `Compare` (only for `U` satisfied [cmp.Ordered](https://pkg.go.dev/cmp#Ordered) constraint).
 - Serializable: TODO
 
 ## Usage

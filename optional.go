@@ -27,6 +27,11 @@ func Wrap[U any](value U) T[U] {
 	}
 }
 
+// Empty returns empty container of any type U.
+func Empty[U any]() T[U] {
+	return T[U]{}
+}
+
 // Unwrap returns x content as tuple as the value and set indicator.
 func Unwrap[U any](x T[U]) (U, bool) {
 	return x.value, x.set

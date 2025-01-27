@@ -47,6 +47,9 @@ func TestLess(t *testing.T) {
 		{"x is NaN", args{opt.Wrap(math.NaN()), opt.Wrap(4.0)}, true},
 		{"y is NaN", args{opt.Wrap(4.0), opt.Wrap(math.NaN())}, false},
 		{"x, y both are NaN", args{opt.Wrap(math.NaN()), opt.Wrap(math.NaN())}, false},
+		{"x is not set", args{opt.Empty[float64](), opt.Wrap(1.0)}, true},
+		{"y is not set", args{opt.Wrap(1.0), opt.Empty[float64]()}, false},
+		{"x,y both are not set", args{opt.Empty[float64](), opt.Empty[float64]()}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -73,6 +76,9 @@ func TestCompare(t *testing.T) {
 		{"x is NaN", args{opt.Wrap(math.NaN()), opt.Wrap(4.0)}, -1},
 		{"y is NaN", args{opt.Wrap(4.0), opt.Wrap(math.NaN())}, 1},
 		{"x, y both are NaN", args{opt.Wrap(math.NaN()), opt.Wrap(math.NaN())}, 0},
+		{"x is not set", args{opt.Empty[float64](), opt.Wrap(1.0)}, -1},
+		{"y is not set", args{opt.Wrap(1.0), opt.Empty[float64]()}, 1},
+		{"x,y both are not set", args{opt.Empty[float64](), opt.Empty[float64]()}, 0},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

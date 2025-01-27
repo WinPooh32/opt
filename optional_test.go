@@ -3,6 +3,7 @@ package opt_test
 import (
 	"fmt"
 	"math"
+	"slices"
 	"testing"
 
 	"github.com/WinPooh32/opt"
@@ -87,4 +88,50 @@ func TestCompare(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCompare_SliceSorting(t *testing.T) {
+	type args struct {
+		s []opt.T[float64]
+	}
+	tests := []struct {
+		name string
+		args args
+		want []opt.T[float64]
+	}{
+		{
+			"unordered",
+			args{[]opt.T[float64]{
+				opt.Wrap(3.0),
+				opt.Empty[float64](),
+				opt.Wrap(1.0),
+				opt.Empty[float64](),
+				opt.Wrap(8.0),
+			}},
+			[]opt.T[float64]{
+				opt.Empty[float64](),
+				opt.Empty[float64](),
+				opt.Wrap(1.0),
+				opt.Wrap(3.0),
+				opt.Wrap(8.0),
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := append([]opt.T[float64](nil), tt.args.s...)
+
+			slices.SortFunc(got, opt.Compare)
+
+			if !equal(got, tt.want) {
+				t.Errorf("Sort using Compare() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func equal(s1, s2 []opt.T[float64]) bool {
+	a1 := fmt.Sprintf("%v", s1)
+	a2 := fmt.Sprintf("%v", s2)
+	return a1 == a2
 }
